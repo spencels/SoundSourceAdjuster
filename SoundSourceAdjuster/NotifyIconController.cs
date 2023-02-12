@@ -56,7 +56,7 @@ namespace SoundSourceAdjuster
                 .Where(x => x.State == DeviceState.Active)
                 .Select(x =>
                 {
-                    var item = new ToolStripMenuItem(x.Name)
+                    var item = new ToolStripMenuItem(x.FullName)
                     {
                         Checked = x.IsDefaultDevice,
                         Tag = x,
