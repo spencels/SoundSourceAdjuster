@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,6 +11,9 @@ using AudioSwitcher.AudioApi;
 
 namespace SoundSourceAdjuster
 {
+    /// <summary>
+    /// Manages the tray icon and its logic.
+    /// </summary>
     public class NotifyIconController
     {
         NotifyIcon notifyIcon = null;
@@ -17,6 +21,9 @@ namespace SoundSourceAdjuster
 
         private NotifyIconController() { }
 
+        /// <summary>
+        /// Creates and initializes and instance of the class.
+        /// </summary>
         public static NotifyIconController Create(AudioDevicesService audioDevicesService)
         {
             var controller = new NotifyIconController();
@@ -34,13 +41,19 @@ namespace SoundSourceAdjuster
                 Text = "Audio Switcher",
                 Icon = new System.Drawing.Icon("NotifyIconController.ico"),
             };
-            controller.notifyIcon.Click += new EventHandler(controller.ContextMenuPopup);
+            controller.notifyIcon.Click += new EventHandler(controller.OnClick);
 
+            // Context menu must be populated before first click, or it doesn't show anything.
+            controller.PopulateContextMenu(controller.notifyIcon.ContextMenuStrip);
             return controller;
         }
 
-        private void ContextMenuPopup(object sender, EventArgs e)
+        /// <summary>
+        /// Handles Click event.
+        /// </summary>
+        private void OnClick(object sender, EventArgs e)
         {
+            Console.WriteLine("OnClick");
             PopulateContextMenu(notifyIcon.ContextMenuStrip);
         }
 
