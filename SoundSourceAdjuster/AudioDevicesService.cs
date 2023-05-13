@@ -1,6 +1,5 @@
 ﻿using AudioSwitcher.AudioApi.CoreAudio;
 using AudioSwitcher.AudioApi;
-using CoreAudio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
